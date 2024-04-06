@@ -20,7 +20,7 @@ eventsController.addEvent = async (res, req, next) => {
     const query = `INSERT INTO events (event_title, event_description, location, date)
                    VALUES ($1, $2, $3, $4)`;
 
-    const result = await db.query(query, values);
+    const result = await db(query, values);
     res.locals.newEvent = result;
     return next();
   } catch (error) {
@@ -40,7 +40,7 @@ eventsController.deleteEvent = async (req, res, next) => {
     const query = `DELETE FROM events
                    WHERE id = $1`;
     
-    const result = await db.query(query, values);
+    const result = await db(query, values);
     res.locals.deletedEvent = result;
     return next();
     } catch (error) {
@@ -60,7 +60,7 @@ eventsController.updateEvent = async (req, res, next) => {
                    SET event_title = $2, event_description = $3, location = $4, date = $5
                    WHERE id = $1`
     
-    const result = await db.query(query, values);
+    const result = await db(query, values);
     res.locals.updatedEvent = result;
     return next();
   } catch (error) {

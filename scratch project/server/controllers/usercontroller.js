@@ -35,7 +35,7 @@ const userController = {
             try {
                 // Query the database for the user by username
                 const query = 'SELECT * FROM users WHERE username = $1';
-                const { rows } = await db.query(query, [username]);
+                const { rows } = await db(query, [username]);
     
                 // If no user is found
                 if (rows.length === 0) {
