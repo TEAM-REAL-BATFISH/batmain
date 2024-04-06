@@ -3,8 +3,13 @@ import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast'
 import Login from './components/login';
+import SignUp from './components/signup';
 
 axios.defaults.baseURL = '';
+import Home from './components/home';
+
+axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.withCredentials = true
 
 function App() {
   return (
@@ -12,6 +17,8 @@ function App() {
       <Toaster position='bottom-right' toastOptions={{ duration: 2000 }} />
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={ <Login /> }/>
         </Routes>
       </BrowserRouter>

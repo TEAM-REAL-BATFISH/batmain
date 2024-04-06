@@ -66,3 +66,31 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.signup label,
+.signup input,
+.signup button {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+}
+
+.container {
+  border: 3px solid #ccc; /* Add border */
+  padding: 40px; /* Add padding */
+  border-radius: 20px; /* Add border radius for rounded corners */
+}
+
+.signup input {
+  border-radius: 20px;
+  height: 25px;
+  width: 400px;
+}
+
+.signup label {
+  color: red;
+}
