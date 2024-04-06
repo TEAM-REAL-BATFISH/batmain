@@ -9,10 +9,7 @@ const PORT = 3000;
 const app = express();
 
 app.use(express.json());
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true
-}));
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(cookieParser());
 
 const currentDir = new URL('.', import.meta.url).pathname;
