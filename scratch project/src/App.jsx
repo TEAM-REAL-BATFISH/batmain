@@ -1,18 +1,22 @@
-import { useState } from 'react'
 import './App.css'
 import {Routes, Route} from 'react-router-dom';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast'
 import SignUp from './components/signup';
+import Home from './components/home';
+
+axios.defaults.baseURL = 'http://localhost:3000';
+axios.defaults.withCredentials = true
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-      Event Listener
-      </div>
+    <Toaster position='bottom-right' toastOptions={{duration: 2000}} />
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/signup' element={<SignUp />} />
+      {/* <Route path='/profile' element={<Profile />} /> */}
+    </Routes>
     </>
   )
 }
