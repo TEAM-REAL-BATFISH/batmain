@@ -1,10 +1,10 @@
 import express from 'express';
-const app = express();
 import path from 'path';
-const PORT = 3000;
 import cors from 'cors';
-import db from './models/models.js'
+import userController from './controllers/userController.js'
 
+const PORT = 3000;
+const app = express();
 
 app.use(express.json());
 app.use(cors());
@@ -25,7 +25,7 @@ app.post('/signup', userController.signup, (req, res) => {
 })
 
 app.post('/login', userController.login, (req, res) => {
-    res.json({ message: "Login successful", user: { username: user.username } }); 
+    res.json({ message: `Login successful: ${res.locals.user}`}); 
 })
 
 // they have a /profile on front end that renders bell and whistles

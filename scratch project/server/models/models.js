@@ -1,6 +1,7 @@
 //import { Pool } from 'pg';
 import pkg from 'pg';
 const { Pool } = pkg;
+import bcrypt from 'bcrypt'
 
 
 const PG_URI = 'postgres://idklsxyj:QVrCWd-Mxub3TsH1yUBbFuYnznIAOK5P@isilo.db.elephantsql.com/idklsxyj';
@@ -11,7 +12,7 @@ const pool = new Pool({
     connectionString: PG_URI
   });
 
-  async function hashPassword (password) {
+  export async function hashPassword (password) {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
     return hashedPassword;
@@ -27,4 +28,4 @@ const pool = new Pool({
       console.log('executed query', text);
       return pool.query(text, params, callback);
     }
-  };
+  }
