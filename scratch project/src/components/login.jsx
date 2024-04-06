@@ -1,0 +1,52 @@
+import {useState} from "react";
+import axios from "axios";
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
+
+export default function Login() {
+    const navigate = useNavigate()
+    const [data, setData] = useState({
+        email: '',
+        password: ''
+    })
+
+    const login = async (e) => {
+        e.preventDefault();
+        const { email, password } = data
+        try {
+            const { data } = await axios.post('/login', {
+                email,
+                password
+            });
+            if (data.error){
+                toast.error(data.error)
+            } else {
+                setData({})
+                navigate('/home')
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
+    return (
+        <div className="login-container">
+            <h2>Login</h2>
+            <form className="login-form" onSubmit={login}>
+                <label htmlFor="email">email</label>
+                <input value={data.email} onChange={(e) => setData({...data, email: e.target.value})} type="email" placeholder="youremail@mail.com" id="email" name="email"/>
+                <label htmlFor="password">password</label>
+                <input value={data.password} onChange={(e) => setData({...data, password: e.target.value})} type="password" placeholder="*******" id="password" name="password"/>
+                <button type="submit">Log In</button>
+            </form>
+            <button>Don't have an account? Register here.</button>
+        </div>
+    )
+}
+//figure out where this goes
+{/* <div className='App'>
+        {
+          currentForm === "login" ? <Login/> : <SignUp/>
+        }
+      </div> */}
