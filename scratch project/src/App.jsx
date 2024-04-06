@@ -4,12 +4,11 @@ import axios from 'axios';
 import { Toaster } from 'react-hot-toast'
 import Login from './components/login';
 import SignUp from './components/signup';
-
-axios.defaults.baseURL = '';
 import Home from './components/home';
 
 axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:5173';
 
 function App() {
   return (
