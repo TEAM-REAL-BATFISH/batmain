@@ -1,22 +1,33 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const path = require('path');
-const PORT = process.env.PORT || 3000; // Port number, use environment variable if available
-const cors = require('cors');
+import path from 'path';
+const PORT = 3000;
+import cors from 'cors';
+import db from './models/models.js'
 
 
 app.use(express.json());
 app.use(cors());
 
-app.use(express.static(path.resolve(__dirname, '../index.html')));
+const currentDir = new URL('.', import.meta.url).pathname;
+
+app.use(express.static(path.resolve(currentDir, '../index.html')));
 
 app.get('/', (req, res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
+  return res.status(200).sendFile(path.resolve(currentDir, '../index.html'))
 });
+
+app.get('/' , async (req, res) => {
+  const query = 'SELECT * FROM users'
+
+  const response = await db.query(query);
+  console.log(response);
+  res.status(200).send('Good');
+})
 
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
-})
+});
 
-module.exports = app;
+export default app;
 
