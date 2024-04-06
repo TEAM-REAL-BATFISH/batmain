@@ -1,23 +1,25 @@
-import { useState } from 'react'
 import './App.css'
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast'
-import SignUp from './components/signup';
+import Login from './components/login';
+
+axios.defaults.baseURL = '';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-      Event Listener
-      </div>
+      <Toaster position='bottom-right' toastOptions={{ duration: 2000 }} />
+      <BrowserRouter>
+        <Routes>
+          <Route path='/login' element={ <Login /> }/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
 
-export default App
+export default App;
 
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
