@@ -1,20 +1,18 @@
 import bcrypt from 'bcrypt';
-import { db, hashedPassword } from '../models/models.js'; // Make sure this points to your database configuration file
+import { db, hashPassword } from '../models/models.js'; // Make sure this points to your database configuration file
 
-
-
-    const userController = {
-        // Signup Controller
-        signup: async (req, res, next) => {
+const userController = {
+  // Signup Controller
+  signup: async (req, res, next) => {
             const { username, password, email } = req.body;
 
             try {
                 // Hash the password
-                password = hashedPassword(password);
+                const hashedPassword = hashPassword(password);
                 
                 // Store user in the database
                 const insertQuery = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
-                const { rows } = await db.query(insertQuery, [username, email, password]);
+                const { rows } = await db.query(insertQuery, [username, email, hashedPassword]);
     
                 const newUser = rows[0];
                 console.log('User created:', newUser); // For debugging, remove or secure log for production
@@ -70,4 +68,4 @@ import { db, hashedPassword } from '../models/models.js'; // Make sure this poin
 
     
 
-module.exports = userController;
+export default userController;
