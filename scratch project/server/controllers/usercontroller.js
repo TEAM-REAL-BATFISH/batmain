@@ -7,15 +7,23 @@ const userController = {
             const { username, password, email } = req.body;
 
             try {
+                console.log(hashPassword);
+
                 // Hash the password
-                const hashedPassword = hashPassword(password);
+                const hashedPassword = await hashPassword(password);
+
+                console.log(hashedPassword);
                 
                 // Store user in the database
                 const insertQuery = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
-                const { rows } = await db.query(insertQuery, [username, email, hashedPassword]);
+                const { rows } = await db(insertQuery, [username, email, hashedPassword]);
     
                 const newUser = rows[0];
                 console.log('User created:', newUser); // For debugging, remove or secure log for production
+
+                //save userID and username;
+                res.locals.user = newUser.username;
+                res.locals.id = newUser.id;
                 
                 return next();
             } catch (error) {
@@ -32,10 +40,14 @@ const userController = {
         login: async (req, res, next) => {
             const { username, password } = req.body;
     
+            console.log('username,:', username);
+            console.log('dbquery:', db);
+            console.log('req.body:', req.body);
             try {
                 // Query the database for the user by username
-                const query = 'SELECT * FROM users WHERE username = $1';
-                const { rows } = await db.query(query, [username]);
+                const query1 = 'SELECT * FROM users WHERE username = $1';
+                console.log('query1:', query1)
+                const { rows } = await db(query1, [username]);
     
                 // If no user is found
                 if (rows.length === 0) {
@@ -53,8 +65,9 @@ const userController = {
     
                 // Successful login
                 res.locals.user = user.username; // Optionally store user info in res.locals for subsequent middleware
-                res.status(200).json({ message: 'Login successful' });
-                next();
+                res.locals.id = user.id; //stores user ID
+                
+                return next();
             } catch (error) {
                 console.error('Login error:', error);
                 next({
