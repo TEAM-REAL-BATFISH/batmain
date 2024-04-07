@@ -37,23 +37,6 @@ export default function SignUp() {
 
   return (
     <div className='container'>
-      <iframe
-      title="Background Video"
-      width="560"
-      height="315"
-      src="./src/assets/friends at bar background stock free video.mp4"
-      frameBorder="0"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: -1
-      }}
-      ></iframe>
       <h1>Event Listener</h1>  
       <form onSubmit={signup} className='signup'>
         <label>Name</label>
