@@ -29,17 +29,26 @@ export default function Login() {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+        const video = document.querySelector('.login-container video');
+        video.playbackRate = 0.70; 
+      }, []); // Empty dependency array ensures the effect runs only once after the component mounts
     
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <video autoPlay muted loop>
+                <source src='/src/assets/EDC Las Vegas Video.mp4' type='video/mp4'></source>
+            </video>
+            <h1>Event <span>List</span>ener</h1>
             <form className="login-form" onSubmit={login}>
-                <label htmlFor="email">email</label>
+                <label htmlFor="email">Email</label>
                 <input value={data.email} onChange={(e) => setData({...data, email: e.target.value})} type="email" placeholder="youremail@mail.com" id="email" name="email"/>
-                <label htmlFor="password">password</label>
+                <label htmlFor="password">Password</label>
                 <input value={data.password} onChange={(e) => setData({...data, password: e.target.value})} type="password" placeholder="*******" id="password" name="password"/>
                 <button type="submit">Log In</button>
             </form>
+            <footer>"Copyright © [2024] BatFish Inc. All rights reserved."</footer>
             <button>Don't have an account? Register here.</button>
         </div>
     )

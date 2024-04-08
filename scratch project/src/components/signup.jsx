@@ -44,7 +44,7 @@ export default function SignUp() {
   return (
     <div className='container'>
       <video autoPlay muted loop>
-        <source src='/src/assets/EDC Las Vegas Video.mp4' type='video/mp4'></source>
+        <source src='/src/assets/Gokart stock footage.mp4' type='video/mp4'></source>
       </video>
       <h1>Event Listener</h1>  
       <form onSubmit={signup} className='signup'>
