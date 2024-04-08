@@ -2,6 +2,29 @@ import { db } from '../models/models.js';
 
 const eventsController = {};
 
+eventsController.getAllEvents = async (req, res, next) => {
+  try {
+    const currentDate = Date.now();
+    const values = [new Date(currentDate)];
+
+    const query = `SELECT * 
+             FROM events
+             WHERE date >= $1
+             ORDER BY date ASC`
+    
+    const response = await db(query, values);
+    res.locals.events = response.rows;
+    return next();
+  } catch(error) {
+    next({
+      log: 'Error retrieving events',
+      message: {error: 'Error retrieving events'}
+    });
+  }
+}
+
+
+// need to add host_id param to addEvent
 eventsController.addEvent = async (res, req, next) => {
   
   const { event_title, event_description, location, date} = req.body;
@@ -31,6 +54,7 @@ eventsController.addEvent = async (res, req, next) => {
   }
 }
 
+//delete events from events_attending table as well
 eventsController.deleteEvent = async (req, res, next) => {
   const { id } = req.body;
 

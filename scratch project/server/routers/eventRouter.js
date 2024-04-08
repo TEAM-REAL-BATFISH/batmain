@@ -4,6 +4,10 @@ import eventsController from '../controllers/eventsController.js'
 
 const eventRouter = express.Router();
 
+eventRouter.get('/', eventsController.getAllEvents, (req, res) => {
+    res.status(200).json(res.locals.events);
+})
+
 eventRouter.post('/add', eventsController.addEvent, (req, res) => {
     res.status(200).json(res.locals.newEvent);
 });
@@ -19,3 +23,7 @@ eventRouter.patch('/update', eventsController.updateEvent, (req, res) => {
 export default eventRouter;
 
 //add cookieController to make sure that user is logged in
+//for update and delete, make sure that the user is host
+
+//add myevents
+//add 
