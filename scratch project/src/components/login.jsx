@@ -53,9 +53,3 @@ export default function Login() {
         </div>
     )
 }
-//figure out where this goes
-{/* <div className='App'>
-        {
-          currentForm === "login" ? <Login/> : <SignUp/>
-        }
-      </div> */}
