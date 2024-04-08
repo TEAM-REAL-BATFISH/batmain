@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react'
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -35,8 +36,16 @@ export default function SignUp() {
     }
   }
 
+  useEffect(() => {
+    const video = document.querySelector('.container video');
+    video.playbackRate = 0.70; 
+  }, []); // Empty dependency array ensures the effect runs only once after the component mounts
+
   return (
     <div className='container'>
+      <video autoPlay muted loop>
+        <source src='/src/assets/EDC Las Vegas Video.mp4' type='video/mp4'></source>
+      </video>
       <h1>Event Listener</h1>  
       <form onSubmit={signup} className='signup'>
         <label>Name</label>

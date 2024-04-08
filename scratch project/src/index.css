@@ -83,6 +83,12 @@ button:focus-visible {
   border: 3px solid #ccc; /* Add border */
   padding: 40px; /* Add padding */
   border-radius: 20px; /* Add border radius for rounded corners */
+  color:orange; 
+  background-color: rgba(59, 56, 56, 0.7); /* Set the background color with opacity (0.0 to 1.0) */
+}
+
+.container footer {
+  color: white;
 }
 
 .signup input {
@@ -92,7 +98,7 @@ button:focus-visible {
 }
 
 .signup label {
-  color: red;
+  color: orange; 
 }
 
 .landing-page-tabs {
