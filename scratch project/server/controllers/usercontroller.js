@@ -6,30 +6,35 @@ const userController = {
   signup: async (req, res, next) => {
     const { name, username, password, email } = req.body;
 
-    try {
-      // Hash the password
-      const hashedPassword = await hashPassword(password);
-      console.log(hashedPassword);        
-      // Store user in the database
-      const insertQuery = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3) RETURNING *';
-      const { rows } = await db(insertQuery, [name, username, email, hashedPassword]);
-    
-      const newUser = rows[0];
-      console.log('User created:', newUser); // For debugging, remove or secure log for production
+            try {
+                console.log(hashPassword);
 
-      //save userID and username;
-      res.locals.user = newUser.username;
-      res.locals.id = newUser.id;
-      return next();
-    } catch (error) {
-      console.error('Signup error:', error);
-      next({
-        log: 'Error in userController.signup',
-        status: 500,
-        message: { err: 'An error occurred during signup' },
-      });
-    }
-  },
+                // Hash the password
+                const hashedPassword = await hashPassword(password);
+
+                console.log(hashedPassword);
+                
+                // Store user in the database
+                const insertQuery = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4) RETURNING *';
+                const { rows } = await db(insertQuery, [name, username, email, hashedPassword]);
+    
+                const newUser = rows[0];
+                console.log('User created:', newUser); // For debugging, remove or secure log for production
+
+                //save userID and username;
+                res.locals.user = newUser.username;
+                res.locals.id = newUser.id;
+                
+                return next();
+            } catch (error) {
+                console.error('Signup error:', error);
+                next({
+                    log: 'Error in userController.signup',
+                    status: 500,
+                    message: { err: 'An error occurred during signup' },
+                });
+            }
+        },
     
         // Login Controller
         login: async (req, res, next) => {
