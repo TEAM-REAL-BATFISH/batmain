@@ -31,8 +31,6 @@ app.post('/login', userController.login, cookieController.setCookie, (req, res) 
     res.status(200).json({ message: `Login successful: ${res.locals.user}`}); 
 })
 
-
-
 app.use('/logout', cookieController.deleteCookie, (req, res) => {
     res.redirect('/');
 })
@@ -50,7 +48,8 @@ app.use((err, req, res, next) => {
     };
     const errorObj = Object.assign({}, defaultErr, err);
     console.log(errorObj.log);
-    return res.status(errorObj.status).json(errorObj.message);
+    res.status(errorObj.status).json(errorObj.message);
+    return next();
     });
 
 app.listen(PORT, () => {
