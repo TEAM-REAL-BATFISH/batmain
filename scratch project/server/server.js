@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 // set routes
 app.use(express.static(path.resolve(currentDir, '../index.html')));
-app.use('/editEvent', eventsRouter);
+app.use('/event', eventsRouter);
 
 
 // this is home page v
