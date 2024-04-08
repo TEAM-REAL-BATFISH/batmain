@@ -11,15 +11,60 @@ cookieController.setCookie = (req, res, next) => {
 };
 
 cookieController.deleteCookie = async (req, res, next) => {
-  res.cookie('ssid', '', { expires: new Date(0), httpOnly: true});
+  try {
+    // await new Promise((resolve, reject) => {
+    //   res.cookie('ssid', '', { expires: new Date(0), httpOnly: true});
+    //   resolve();
+      await res.clearCookie('ssid');
+      return next();
 
-  return next();
+    
+  } catch (error) {
+    return res.status(500).send('Internal Server Error');
+  }
 };
+
+// req.cookies.ssid === res.locals.id
 
 cookieController.checkCookie = async (req, res, next) => {
-  if (req.cookies.ssid === res.locals.id)
-  return next();
+  try {
+    if (req.cookies.ssid){
+      return res.redirect('/main');
+  } else {
+    return res.redirect('/');
+  }
+  } catch (error) {
+    return res.status(500).send('Internal Server Error');
+  }
 };
+
+cookieController.checkCookieLanding = async (req, res, next) => {
+  try {
+    if (req.cookies.ssid){
+      return res.redirect('/main');
+    } else {
+      return next();
+    }
+  } catch (error) {
+    return res.status(500).send('Internal Server Error');
+  }
+};
+
+cookieController.checkCookieMain = async (req, res, next) => {
+  try {
+    if (req.cookies.ssid){
+      return next();
+    } else {
+      return res.redirect('/');
+    }
+  } catch (error) {
+    return res.status(500).send('Internal Server Error');
+  }
+}
+
+cookieController.isLoggedIn = async (req, res, next) => {
+  
+}
 
 // cookies are saved in req.cookies.ssid;
 
@@ -59,9 +104,6 @@ cookieController.setSSIDCookie = (req, res, next) => {
   return next();
 };
 
-*/cookieController.isLoggedIn = async (req, res, next) => {
-  
-}
-
+*/
 
 export default cookieController;
