@@ -83,6 +83,12 @@ button:focus-visible {
   border: 3px solid #ccc; /* Add border */
   padding: 40px; /* Add padding */
   border-radius: 20px; /* Add border radius for rounded corners */
+  color:orange; 
+  background-color: rgba(59, 56, 56, 0.7); /* Set the background color with opacity (0.0 to 1.0) */
+}
+
+.container footer {
+  color: white;
 }
 
 .signup input {
@@ -92,5 +98,59 @@ button:focus-visible {
 }
 
 .signup label {
-  color: red;
+  color: orange; 
+}
+
+.landing-page-tabs {
+  position: absolute;
+  top: 60px; 
+  right: 200px; 
+  font-size: 20px;
+}
+
+.landing-page-tabs a {
+  margin-left: 70px; /* Add some space between the links */
+  text-decoration: none;
+  color: rgb(67, 248, 248);
+}
+
+.landing-page-tabs a:hover {
+  text-decoration: underline;
+}
+
+.landingpage-container {
+  position: relative; /* Ensure positioning context for absolute positioned video */
+  width: 100%; /* Take up full width of the viewport */
+  height: 100vh; /* Take up full height of the viewport */
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Resize video to cover container */
+  z-index: -100;
+}
+
+.landing-page-footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 10px 0; /* Adjust padding as needed */
+}
+
+.landingpage-header {
+  font-size: 300%;
+  color: rgb(67, 248, 248);
+}
+
+.landingpage-header-descriptions {
+  font-size: 180%;
+  color: rgb(67, 248, 248); 
 }
