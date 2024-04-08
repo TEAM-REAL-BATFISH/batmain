@@ -4,7 +4,7 @@ import { db, hashPassword } from '../models/models.js'; // Make sure this points
 const userController = {
   // Signup Controller
   signup: async (req, res, next) => {
-            const { username, password, email } = req.body;
+            const { name, username, password, email } = req.body;
 
             try {
                 console.log(hashPassword);
@@ -15,8 +15,8 @@ const userController = {
                 console.log(hashedPassword);
                 
                 // Store user in the database
-                const insertQuery = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
-                const { rows } = await db(insertQuery, [username, email, hashedPassword]);
+                const insertQuery = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3) RETURNING *';
+                const { rows } = await db(insertQuery, [name, username, email, hashedPassword]);
     
                 const newUser = rows[0];
                 console.log('User created:', newUser); // For debugging, remove or secure log for production
