@@ -1,20 +1,30 @@
+//import necessary libraries
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
-import userController from './controllers/userController.js'
-import cookieController from './controllers/cookieController.js'
 import cookieParser from 'cookie-parser';
 
+//import routers
+import eventsRouter from './routers/eventRouter.js'
+
+//import controllers
+import userController from './controllers/userController.js'
+import cookieController from './controllers/cookieController.js'
+
+// set initial parameters
 const PORT = 3000;
 const app = express();
+const currentDir = new URL('.', import.meta.url).pathname;
 
+// configure middleware for express
 app.use(express.json());
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
 app.use(cookieParser());
 
-const currentDir = new URL('.', import.meta.url).pathname;
-
+// set routes
 app.use(express.static(path.resolve(currentDir, '../index.html')));
+app.use('/editEvent', eventsRouter);
+
 
 // this is home page v
 app.get('/', (req, res) => { 
@@ -40,6 +50,12 @@ app.post('/profile', (req, res) => {
     res.send('Profile wooooo!');
 })
 
+// invalid request route
+app.use('*', (req,res) => {
+    res.status(404).send('Not Found');
+});
+
+// Global error handler
 app.use((err, req, res, next) => {
     const defaultErr = {
         log: 'Express error handler caught unknown middleware error',
@@ -57,4 +73,6 @@ app.listen(PORT, () => {
 });
 
 export default app;
+
+// if user is logged in, they should not have access to log in or sign up page
 
