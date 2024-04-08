@@ -154,3 +154,34 @@ video {
   font-size: 180%;
   color: rgb(67, 248, 248); 
 }
+
+.main-container {
+  display: flex;
+}
+
+.left-tab {
+  margin-right: 1160px;
+  margin-bottom: 600px; /* Adjust as needed */
+}
+
+.left-tab button {
+  padding: 15px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.left-tab button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the modal */
+.modal {
+  /* Your modal styles */
+}
+
+.modal-content {
+  /* Your modal content styles */
+}
