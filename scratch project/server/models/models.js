@@ -25,4 +25,4 @@ export async function hashPassword (password) {
   // This will be required in the controllers to be the access point to the database
 export function db (text, params, callback) {
     return pool.query(text, params, callback);
-};
+}
