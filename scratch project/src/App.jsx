@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast'
 import Login from './components/login';
 import SignUp from './components/signup';
 import Home from './components/home';
+import MainPage from './components/mainpage'
 
 axios.defaults.baseURL = 'http://localhost:3000';
 axios.defaults.withCredentials = true
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/login' element={ <Login /> }/>
+          <Route path='/mainpage' element={ <MainPage /> }/>
         </Routes>
       </BrowserRouter>
     </>

@@ -24,6 +24,9 @@ export default function SignUp() {
       const {data} = await axios.post('/signup', {
         name, username, email, password
       })
+    //   if (name === null || username === null || email === null || password === null) {
+    //     toast.error('Need fill in the input feilds')
+    //   }
       if (data.error) {
         toast.error(data.error)
       } else {
