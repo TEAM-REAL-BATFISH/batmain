@@ -38,21 +38,22 @@ const userController = {
     
         // Login Controller
         login: async (req, res, next) => {
-            const { username, password } = req.body;
+            const { email, password } = req.body;
     
-    console.log('username,:', username);
-    console.log('dbquery:', db);
-    console.log('req.body:', req.body);
-    try {
-      // Query the database for the user by username
-      const query1 = 'SELECT * FROM users WHERE username = $1';
-      console.log('query1:', query1)
-      const { rows } = await db(query1, [username]);
-    
-      // If no user is found
-      if (rows.length === 0) {
-        return res.status(404).json({ message: 'User not found' });
-      }
+            console.log('email,:', email);
+            console.log('dbquery:', db);
+            console.log('req.body:', req.body);
+            try {
+                // Query the database for the user by username
+                const query1 = 'SELECT * FROM users WHERE email = $1';
+                console.log('query1:', query1)
+                const { rows } = await db(query1, [email]);
+                    console.log(rows)
+                // If no user is found
+                if (rows.length === 0) {
+                    console.log('Email not found')
+                    return res.status(404).json({ message: 'Email not found' });
+                }
     
       // User found, check the password
       const user = rows[0];

@@ -29,12 +29,12 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
-
+/*
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
-
+*/
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -184,4 +184,65 @@ video {
 
 .modal-content {
   /* Your modal content styles */
+}
+
+.main-container {
+  display: flex;
+}
+
+.left-tab {
+  margin-right: 1160px;
+  margin-bottom: 600px; /* Adjust as needed */
+}
+
+.left-tab button {
+  padding: 15px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.left-tab button:hover {
+  background-color: #0056b3;
+}
+
+/* Styles for the modal */
+.modal {
+  /* Your modal styles */
+}
+
+.modal-content {
+  /* Your modal content styles */
+}
+
+.login-container {
+  border: 3px solid #ccc; /* Add border */
+  padding: 40px; /* Add padding */
+  border-radius: 20px; /* Add border radius for rounded corners */
+  color:orange; 
+  background-color: rgba(59, 56, 56, 0.7); /* Set the background color with opacity (0.0 to 1.0) */
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.login-container footer {
+  color: white;
+}
+.login-container h1 {
+  font-size: 2.2em;
+  line-height: 1.1;
+}
+.login-form label,
+.login-form input,
+.login-form button {
+  margin-bottom: 10px; /* Adjust the margin as needed */
+}
+.login-form input {
+  border-radius: 20px;
+  height: 25px;
+  width: 400px;
 }
