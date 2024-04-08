@@ -44,23 +44,25 @@ export default function SignUp() {
   return (
     <div className='container'>
       <video autoPlay muted loop>
-        <source src='/src/assets/EDC Las Vegas Video.mp4' type='video/mp4'></source>
+        <source src='/src/assets/EDC Las Vegas Video.mp4' type='video/mp4' />
       </video>
-      <h1>Event Listener</h1>  
-      <form onSubmit={signup} className='signup'>
-        <label>Name</label>
-        <input type='text' placeholder='Name...' value={data.name} onChange={(e) => setData({...data, name: e.target.value})}/>
-        <label>UserName</label>
-        <input type='text' placeholder='User Name...' value={data.username} onChange={(e) => setData({...data, username: e.target.value})}/>
-        <label>Email</label>
-        <input type='email' placeholder='Email...' value={data.email} onChange={(e) => setData({...data, email: e.target.value})}/>
-        <label>Password</label>
-        <input type='password' placeholder='Password...' value={data.password} onChange={(e) => setData({...data, password: e.target.value})}/>
-        <label>Confirm Password</label>
-        <input type='password' placeholder='Confirm Password...' value={data.confirmPassword} onChange={(e) => setData({...data, confirmPassword: e.target.value})}/>
-        <button type='submit' className="submit-btn">Submit</button>
-      </form>
+      <h1>Event <span className='text-color-change'>List</span>ener</h1>
+      <div className='signup-text-background-box'>
+        <form onSubmit={signup} className='signup'>
+          <label>Name</label>
+          <input type='text' placeholder='   Full Name' value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />
+          <label>UserName</label>
+          <input type='text' placeholder='   Username' value={data.username} onChange={(e) => setData({ ...data, username: e.target.value })} />
+          <label>Email</label>
+          <input type='email' placeholder='   Email Address' value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} />
+          <label>Password</label>
+          <input type='password' placeholder='   Password' value={data.password} onChange={(e) => setData({ ...data, password: e.target.value })} />
+          <label>Confirm Password</label>
+          <input type='password' placeholder='   Confirm Password' value={data.confirmPassword} onChange={(e) => setData({ ...data, confirmPassword: e.target.value })} />
+          <button type='submit' className="submit-btn">Submit</button>
+        </form>
+      </div>
       <footer>"Copyright © [2024] BatFish Inc. All rights reserved."</footer>
     </div>
-  )
+  );
 }

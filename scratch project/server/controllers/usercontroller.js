@@ -5,7 +5,7 @@ const userController = {
   // Signup Controller
   signup: async (req, res, next) => {
             const { name, username, password, email } = req.body;
-
+            // console.log(req.body)
             try {
                 console.log(hashPassword);
 
@@ -15,7 +15,7 @@ const userController = {
                 console.log(hashedPassword);
                 
                 // Store user in the database
-                const insertQuery = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3) RETURNING *';
+                const insertQuery = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4) RETURNING *';
                 const { rows } = await db(insertQuery, [name, username, email, hashedPassword]);
     
                 const newUser = rows[0];

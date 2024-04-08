@@ -1,3 +1,4 @@
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -45,6 +46,9 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 15px;
 }
 button:hover {
   border-color: #646cff;
@@ -79,27 +83,38 @@ button:focus-visible {
   margin-bottom: 10px; /* Adjust the margin as needed */
 }
 
-.container {
-  border: 3px solid #ccc; /* Add border */
-  padding: 40px; /* Add padding */
-  border-radius: 20px; /* Add border radius for rounded corners */
-  color:orange; 
-  background-color: rgba(59, 56, 56, 0.7); /* Set the background color with opacity (0.0 to 1.0) */
-}
-
 .container footer {
   color: white;
 }
 
 .signup input {
-  border-radius: 20px;
-  height: 25px;
-  width: 400px;
+  width: 70%; /* Adjust this value to your desired width */
+  margin-left: auto;
+  margin-right: auto;
+  display: block; /* Ensures inputs are treated as block-level elements, enabling horizontal centering with margins */
+  margin-top: 10px; /* Optional: Adds some space above each input for visual separation */
+  border-radius: 8px; /* Optional: Matches the button's border-radius for consistent styling */
+  padding: 0.6em 1em; /* Optional: Adjust padding to match the design of the button if desired */
 }
 
 .signup label {
-  color: orange; 
+  color: rgb(169, 249, 186); 
 }
+
+.signup-text-background-box {
+  position: relative; /* Changed from absolute to relative for flow within the container */
+  margin: auto; /* Centers the box in the container */
+  width: 90%; /* Adjusted width to fit form content */
+  max-width: 500px; /* Maximum width to contain the form */
+  min-width: 280px; /* Minimum width to maintain usability on smaller screens */
+  padding: 40px; /* Padding to ensure space around the form elements */
+  background-image: linear-gradient(to right, rgba(67, 185, 248, 0.778), rgba(67, 198, 67, 0.767));
+  border-radius: 25px; /* Adjust for desired curvature */
+  border: 4px solid rgba(255, 255, 255, 0.558);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+  animation: none; /* Assuming static background box for form; remove or adjust as needed */
+}
+
 
 .landing-page-tabs {
   position: absolute;
@@ -111,7 +126,7 @@ button:focus-visible {
 .landing-page-tabs a {
   margin-left: 70px; /* Add some space between the links */
   text-decoration: none;
-  color: rgb(67, 248, 248);
+  color: rgb(255, 255, 255);
 }
 
 .landing-page-tabs a:hover {
@@ -147,10 +162,46 @@ video {
 
 .landingpage-header {
   font-size: 300%;
-  color: rgb(67, 248, 248);
+  font-family: 'Roboto', sans-serif !important;
+
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .landingpage-header-descriptions {
   font-size: 180%;
-  color: rgb(67, 248, 248); 
+  color: rgba(250, 240, 240, 0.74); 
+}
+
+.text-background-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 800px;
+  min-width: 300px;
+  padding-top: 0%;
+  padding-bottom: 20px;
+  padding-right: 0px;
+  padding-left: 0px;
+  background-image: linear-gradient(to right, rgba(67, 185, 248, 0.778), rgba(67, 198, 67, 0.767));
+  border-radius: 50px;
+  z-index: -1;
+  border: 4px solid rgba(255, 255, 255, 0.558);
+  animation: float 6s ease-in-out infinite;
+}
+
+
+.text-color-change {
+  /* placeholder for List in Event Listener color*/
+  color: #97ff52; /* Change this color to whatever you prefer */
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-20px);
+  }
 }
