@@ -27,28 +27,32 @@ app.use('/editEvent', eventsRouter);
 
 
 // this is home page v
-app.get('/', (req, res) => { 
+app.get('/', cookieController.checkCookieLanding, (req, res) => { 
     //   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
     res.send('Yahooooo Bat fish')
-    });
+});
+
+app.get('/main', cookieController.checkCookieMain, (req, res) => {
+    res.status(200).send('Welcome to main page!')
+})
     
 app.post('/signup', userController.signup, cookieController.setCookie, (req, res) => {
     // console.log(res.locals.user.username)
     res.status(201).json({ message: 'User successfully created' });
-})
+});
 
 app.post('/login', userController.login, cookieController.setCookie, (req, res) => {
     res.status(200).json({ message: `Login successful: ${res.locals.user}`}); 
-})
+});
 
-app.use('/logout', cookieController.deleteCookie, (req, res) => {
-    res.redirect('/');
-})
+app.post('/logout', cookieController.deleteCookie, (req, res) => {
+    res.send('Logged Out!')
+});
 
 // they have a /profile on front end that renders bell and whistles
 app.post('/profile', (req, res) => {
     res.send('Profile wooooo!');
-})
+});
 
 // invalid request route
 app.use('*', (req,res) => {
