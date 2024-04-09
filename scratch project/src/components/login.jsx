@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ export default function Login() {
 
     const login = async (e) => {
         e.preventDefault();
-        const { email, password } = data
+        const { email, password } = data;
         try {
             const { data } = await axios.post('/login', {
                 email,
@@ -23,7 +23,7 @@ export default function Login() {
                 toast.error(data.error)
             } else {
                 setData({})
-                navigate('/home')
+                navigate('/mainpage')
             }
         } catch (error) {
             if (error.response && error.response.status === 404){
@@ -39,15 +39,20 @@ export default function Login() {
     
     }
 
+    const navSignUp = () => {
+        navigate('/signup');
+    };
+
     useEffect(() => {
         const video = document.querySelector('.login-container video');
         video.playbackRate = 0.70; 
       }, []); // Empty dependency array ensures the effect runs only once after the component mounts
     
     return (
+        <div>
         <div className="login-container">
             <video autoPlay muted loop>
-                <source src='/src/assets/EDC Las Vegas Video.mp4' type='video/mp4'></source>
+                <source src='/src/assets/Gokart stock footage.mp4' type='video/mp4'></source>
             </video>
             <h1>Event <span>List</span>ener</h1>
             <form className="login-form" onSubmit={login}>
@@ -57,8 +62,11 @@ export default function Login() {
                 <input value={data.password} onChange={(e) => setData({...data, password: e.target.value})} type="password" placeholder="*******" id="password" name="password"/>
                 <button type="submit">Log In</button>
             </form>
-            <footer>"Copyright © [2024] BatFish Inc. All rights reserved."</footer>
-            <button>Don't have an account? Register here.</button>
+            <button onClick={navSignUp}>Don't have an account? Register here.</button>
+        </div> 
+        <div>
+        <footer className='footer-login'>Copyright © [2024] BatFish Inc. All rights reserved.</footer>
+        </div>
         </div>
     )
 }
