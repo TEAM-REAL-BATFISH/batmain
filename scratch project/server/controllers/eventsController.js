@@ -48,6 +48,7 @@ eventsController.getAttendingEvents = async (req, res, next) => {
     const values = [user_id];
     const query = `SELECT *
                    FROM events_attending
+                   LEFT JOIN events ON events.id = events_attending.event_id
                    WHERE user_id = $1`
 
     const response = await db(query, values);
