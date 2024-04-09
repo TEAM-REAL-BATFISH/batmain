@@ -63,9 +63,10 @@ export default function SignUp() {
           <label>Confirm Password</label>
           <input type='password' placeholder='   Confirm Password' value={data.confirmPassword} onChange={(e) => setData({ ...data, confirmPassword: e.target.value })} />
           <button type='submit' className="submit-btn">Submit</button>
+          <button type="button" className="account-exists-btn" onClick={() => navigate('/login')}>Already have an account?</button>
         </form>
       </div>
-      <footer>"Copyright © [2024] BatFish Inc. All rights reserved."</footer>
+      <footer className='footer-signup'>Copyright © [2024] BatFish Inc. All rights reserved</footer>
     </div>
   );
 }
