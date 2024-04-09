@@ -26,8 +26,17 @@ export default function Login() {
                 navigate('/home')
             }
         } catch (error) {
-            console.log(error)
+            if (error.response && error.response.status === 404){
+                toast.error('Email not found');
+                console.error('Email not found error', error.response.data.error)
+            } else if (error.response && error.response.status === 400) {
+                toast.error('Password does not match');
+                console.error('Password does not match error', error.response.data.error)
+            } else {
+                console.log(error)
+            }
         }
+    
     }
 
     useEffect(() => {
