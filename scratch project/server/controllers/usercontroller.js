@@ -7,6 +7,16 @@ const userController = {
     const { name, username, password, email } = req.body;
 
             try {
+
+                const checkUserQuery = 'SELECT * FROM users WHERE email = $1 OR username = $2';
+
+                const { rows } = await db(checkUserQuery, [email, username]);
+
+                if (rows.length > 0) {
+                  return res.status(400).json({
+                    error: 'User with the provided username or email already exists'
+                  })
+                }
                 console.log(hashPassword);
 
                 // Hash the password
@@ -16,9 +26,9 @@ const userController = {
                 
                 // Store user in the database
                 const insertQuery = 'INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4) RETURNING *';
-                const { rows } = await db(insertQuery, [name, username, email, hashedPassword]);
+                const { rows : newUserRows } = await db(insertQuery, [name, username, email, hashedPassword]);
     
-                const newUser = rows[0];
+                const newUser = newUserRows[0];
                 console.log('User created:', newUser); // For debugging, remove or secure log for production
 
                 //save userID and username;
@@ -52,29 +62,29 @@ const userController = {
                 // If no user is found
                 if (rows.length === 0) {
                     console.log('Email not found')
-                    return res.status(404).json({ message: 'Email not found' });
+                    return res.status(404).json({ error: 'Email not found' });
                 }
     
-      // User found, check the password
-      const user = rows[0];
-      const isMatch = await bcrypt.compare(password, user.password);
-      // Passwords do not match
-      if (!isMatch) {
-        return res.status(400).json({ message: 'Invalid credentials' });
-      }
-      // Successful login
-      res.locals.user = user.username; // Optionally store user info in res.locals for subsequent middleware
-      res.locals.id = user.id; //stores user ID      
-      return next();
-    } catch (error) {
-      console.error('Login error:', error);
-      next({
-        log: 'Error in userController.login',
-        status: 500,
-        message: { err: 'Error in userController.login' },
-      });
-    }
-  }
-};
+                // User found, check the password
+                const user = rows[0];
+                const isMatch = await bcrypt.compare(password, user.password);
+                // Passwords do not match
+                if (!isMatch) {
+                  return res.status(400).json({ error: 'Invalid credentials' });
+                }
+                // Successful login
+                res.locals.user = user.username; // Optionally store user info in res.locals for subsequent middleware
+                res.locals.id = user.id; //stores user ID      
+                return next();
+              } catch (error) {
+                console.error('Login error:', error);
+                next({
+                  log: 'Error in userController.login',
+                  status: 500,
+                  message: { err: 'Error in userController.login' },
+                });
+              }
+            }
+          };
 
 export default userController;

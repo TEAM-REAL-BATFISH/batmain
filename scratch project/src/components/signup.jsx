@@ -20,10 +20,18 @@ export default function SignUp() {
     if (confirmPassword !== password) {
         toast.error('Password not match, try again')
       }
+    console.log('hello');
     try {
       const {data} = await axios.post('/signup', {
         name, username, email, password
       })
+
+      console.log(data);
+
+      if (data.status === 400){
+        toast.error('Username or email already exists');
+      }
+
     //   if (name === null || username === null || email === null || password === null) {
     //     toast.error('Need fill in the input feilds')
     //   }
@@ -35,7 +43,13 @@ export default function SignUp() {
         navigate('/login')
       }
     } catch (error) {
+      if (error.response && error.response.status === 400){
+        toast.error('Email/Username already in use');
+        console.error('Email/Username error', error.response.data.error)
+      } else {
         console.log(error)
+      }
+
     }
   }
 
